@@ -1,4 +1,3 @@
-import LeftSidebar from '@/components/LeftSidebar';
 import TopNavbar from '@/components/TopNavbar';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -28,10 +27,10 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
 				<TopNavbar />
 				<main className="flex min-h-screen">
-					<LeftSidebar />
+					{/* <LeftSidebar /> */}
 					{children}
 				</main>
 			</body>
