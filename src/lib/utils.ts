@@ -13,32 +13,32 @@ interface Role {
 
 export const ClassesArray: Role[] = [
 	{
-		imgURL: '/assets/scout-flank.jpeg',
+		imgURL: '/assets/scout.png',
 		class: 'Flank Scout',
 		alt: 'scout-flank',
 	},
 	{
-		imgURL: '/assets/scout-pocket.jpg',
+		imgURL: '/assets/scout.png',
 		class: 'Pocket Scout',
 		alt: 'scout-pocket',
 	},
 	{
-		imgURL: '/assets/soldier-roamer.jpg',
+		imgURL: '/assets/soldier.png',
 		class: 'Roamer',
 		alt: 'soldier-roamer',
 	},
 	{
-		imgURL: '/assets/soldier-pocket.jpg',
+		imgURL: '/assets/soldier.png',
 		class: 'Pocket Soldier',
 		alt: 'soldier-pocket',
 	},
 	{
-		imgURL: '/assets/demoman.jpg',
+		imgURL: '/assets/demoman.png',
 		class: 'Demoman',
 		alt: 'demoman',
 	},
 	{
-		imgURL: '/assets/medic.jpg',
+		imgURL: '/assets/medic.png',
 		class: 'Medic',
 		alt: 'medic',
 	},
