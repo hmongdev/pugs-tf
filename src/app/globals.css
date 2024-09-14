@@ -21,6 +21,18 @@ body {
 }
 
 @layer base {
+  /* HEADING FONT */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  
+  /* BODY FONT */
+  body {
+    font-family: var(--font-body);
+  }
+  
   .dark {
     --background: 0 0 0;
     --foreground: 60 9 98;
@@ -64,7 +76,7 @@ body {
   }
   
   .topbar {
-    @apply sticky top-0 z-30 flex w-full items-center justify-end bg-card px-4 min-h-[78px];
+    @apply sticky top-0 z-30 flex w-full items-center justify-between bg-card px-4 min-h-[78px];
   }
 }
 
