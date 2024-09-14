@@ -1,4 +1,4 @@
-import TopNavbar from '@/components/TopNavbar';
+import Topbar from '@/components/shared/Topbar';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
@@ -27,12 +27,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
-				<TopNavbar />
-				<main className="flex min-h-screen">
-					{/* <LeftSidebar /> */}
-					{children}
-				</main>
+			<body className={`${geistSans.variable} ${geistMono.variable} antialiased dark h-screen`}>
+				<Topbar />
+				<main className="main">{children}</main>
 			</body>
 		</html>
 	);
