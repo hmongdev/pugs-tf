@@ -24,7 +24,7 @@ export const ClassesArray: Role[] = [
 	},
 	{
 		imgURL: '/assets/soldier.png',
-		class: 'Roamer',
+		class: 'Roamer Soldier',
 		alt: 'soldier-roamer',
 	},
 	{
