@@ -1,9 +1,9 @@
 // utility file that handles authentication flow
 // How to setup Steam Login: https://www.npmjs.com/package/steam-signin
 
+import { SteamProfileType } from '@/types/steam';
 import SteamSignIn from 'steam-signin';
 import SteamID from 'steamid'; // Import SteamID type
-import { SteamProfile } from '../types/steam'; // Import SteamProfile interface
 
 // New instance of `SteamSignIn`
 const signIn = new SteamSignIn(process.env.NEXT_PUBLIC_BASE_URL as string);
@@ -19,7 +19,7 @@ export async function verifyLogin(returnUrl: string): Promise<SteamID> {
 }
 
 // Helper function => Fetch profile data using Steam Web API
-export async function getSteamProfile(steamId: string): Promise<SteamProfile> {
+export async function getSteamProfile(steamId: string): Promise<SteamProfileType> {
 	const response = await fetch(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key=${process.env.STEAM_API_KEY}&steamids=${steamId}`);
 
 	if (!response.ok) {
@@ -28,5 +28,5 @@ export async function getSteamProfile(steamId: string): Promise<SteamProfile> {
 
 	const data = await response.json();
 
-	return data.response.players[0] as SteamProfile;
+	return data.response.players[0] as SteamProfileType;
 }
