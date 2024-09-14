@@ -2,7 +2,8 @@
 
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 
-import { ClassesArray } from '@/lib/utils';
+
+import { ClassesArray } from '@/lib/constants';
 import Image from 'next/image';
 import ClassLock from './ClassLock';
 
