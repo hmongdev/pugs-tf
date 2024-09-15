@@ -2,17 +2,10 @@
 import { verifyLogin } from '@/lib/steam-signin';
 import { NextRequest, NextResponse } from 'next/server';
 
-// Ensure the base URL is defined
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-if (!baseUrl) {
-	throw new Error('NEXT_PUBLIC_BASE_URL is not defined');
-}
-
 export async function GET(req: NextRequest) {
-	try {
-		const returnUrl = req.url;
+	const returnUrl = req.url; // Use req.url directly for verification
 
+	try {
 		if (!returnUrl) {
 			throw new Error('Return URL is missing');
 		}
@@ -23,11 +16,12 @@ export async function GET(req: NextRequest) {
 		// Extract SteamID as a string
 		const steamId64 = steamId.getSteamID64();
 
-		// Redirect user to the home page with Steam ID
-		return NextResponse.rewrite(`${baseUrl}/?steamId=${steamId64}`);
+		// Clone and mutate the URL for redirection
+		const redirectUrl = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/?steamId=${steamId64}`);
+		return NextResponse.redirect(redirectUrl);
 	} catch (error) {
 		console.error('Error during Steam authentication verification:', error);
-		// Redirect to home page with error query parameter
-		return NextResponse.rewrite(`${baseUrl}/?error=auth_failed`);
+		const errorRedirectUrl = new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/?error=auth_failed`);
+		return NextResponse.redirect(errorRedirectUrl);
 	}
 }
