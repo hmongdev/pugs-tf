@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
 	// Create a response object
-	const response = NextResponse.redirect('/');
+	const response = NextResponse.rewrite('/');
 
 	// Clear the cookie by setting its expiration date in the past
 	response.cookies.set('steamToken', '', {

@@ -24,10 +24,10 @@ export async function GET(req: NextRequest) {
 		const steamId64 = steamId.getSteamID64();
 
 		// Redirect user to the home page with Steam ID
-		return NextResponse.redirect(`${baseUrl}/?steamId=${steamId64}`);
+		return NextResponse.rewrite(`${baseUrl}/?steamId=${steamId64}`);
 	} catch (error) {
 		console.error('Error during Steam authentication verification:', error);
 		// Redirect to home page with error query parameter
-		return NextResponse.redirect(`${baseUrl}/?error=auth_failed`);
+		return NextResponse.rewrite(`${baseUrl}/?error=auth_failed`);
 	}
 }

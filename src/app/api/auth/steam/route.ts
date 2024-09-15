@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 		const returnUrl = searchParams.get('returnUrl') ?? `${baseUrl}/api/auth/steam/callback`;
 
 		const authUrl = await getAuthUrl(returnUrl);
-		return NextResponse.redirect(authUrl);
+		return NextResponse.rewrite(authUrl);
 	} catch (error) {
 		console.error('Error during Steam auth initiation:', error);
 		return NextResponse.json({ error: 'Failed to initiate Steam authentication' }, { status: 500 });
