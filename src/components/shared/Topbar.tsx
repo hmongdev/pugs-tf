@@ -1,7 +1,6 @@
 'use client';
 
-import { getSteamProfile } from '@/lib/steam-signin'; // Import the helper function
-import { SteamProfileType } from '@/types/steam'; // Import SteamProfile type
+import { SteamProfileType } from '@/types/steam';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -9,29 +8,26 @@ import { Button } from '../ui/button';
 import { FilterPlayers } from './FilterPlayers';
 
 export default function Topbar() {
-	// Hooks
 	const router = useRouter();
-
-	// States
 	const [steamProfile, setSteamProfile] = useState<SteamProfileType | null>(null);
 	const [loading, setLoading] = useState(false);
 
-	// Constants
 	const returnUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/steam/callback`;
 	const playersOnline = 10;
 
-	// Functions
 	const handleSteamLogin = () => {
-		// GET => Steam Auth
 		router.push(`/api/auth/steam?returnUrl=${encodeURIComponent(returnUrl)}`);
 	};
 
-	// GET => Steam Profile Data
 	const fetchProfile = async (steamId: string) => {
 		setLoading(true);
 		try {
-			const profile = await getSteamProfile(steamId);
-			setSteamProfile(profile);
+			const response = await fetch(`/api/steam-profile?steamId=${steamId}`);
+			if (!response.ok) {
+				throw new Error('Failed to fetch profile');
+			}
+			const data = await response.json();
+			setSteamProfile(data.response.players[0]); // Adjust based on response structure
 		} catch (error) {
 			console.error('Failed to fetch Steam profile:', error);
 		} finally {
@@ -45,7 +41,7 @@ export default function Topbar() {
 		if (steamId) {
 			fetchProfile(steamId);
 		}
-	}, []); // Run only on component mount
+	}, []);
 
 	return (
 		<nav className="topbar">
