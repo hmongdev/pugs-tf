@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 const Popover = PopoverPrimitive.Root;
 
 const PopoverTrigger = React.forwardRef<React.ElementRef<typeof PopoverPrimitive.Trigger>, React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>>(({ ...props }, ref) => (
-	<PopoverPrimitive.Trigger ref={ref} className={cn('rounded-xl p-4')} {...props} />
+	<PopoverPrimitive.Trigger ref={ref} className={cn('h-[40px] rounded-xl p-4')} {...props} />
 ));
 PopoverTrigger.displayName = PopoverPrimitive.Trigger.displayName;
 
