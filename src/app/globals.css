@@ -73,7 +73,7 @@ body {
 
 @layer components {
   .main {
-    @apply flex bg-background justify-center h-full w-4/5;
+    @apply flex bg-background justify-center h-full w-full px-6;
   }
   
   .topbar {

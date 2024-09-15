@@ -1,4 +1,5 @@
 import Topbar from '@/components/shared/Topbar';
+import { ClassProvider } from '@/context/ClassContext';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { BioRhyme, Open_Sans } from 'next/font/google';
@@ -19,11 +20,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
-			<body className={cn('antialiased dark h-screen bg-background text-white', fontBody.variable, fontHeading.variable)}>
-				<Topbar />
-				<main className="main">{children}</main>
-			</body>
-		</html>
+		<ClassProvider>
+			<html lang="en">
+				<body className={cn('antialiased dark h-screen bg-background text-white', fontBody.variable, fontHeading.variable)}>
+					<Topbar />
+					<main className="main">{children}</main>
+				</body>
+			</html>
+		</ClassProvider>
 	);
 }
