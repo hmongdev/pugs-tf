@@ -4,13 +4,11 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useUserContext } from '@/context/UserContext';
 import Link from 'next/link';
-import { useState } from 'react';
 import { Button } from '../ui/button';
 import { FilterPlayers } from './FilterPlayers';
 
 export default function Topbar() {
-	const { steamProfile, loading, login, logout } = useUserContext();
-	const [playersOnline, setPlayersOnline] = useState<number | null>(0);
+	const { steamProfile, loading, login, logout, playersOnline } = useUserContext();
 
 	return (
 		<nav className="topbar">
