@@ -17,7 +17,7 @@ export default function Topbar() {
 
 			<div className="z-10 flex items-center justify-between gap-6 w-full">
 				<div className="flex gap-1">
-					<p className="text-2xl">{playersOnline} Players Online</p>
+					<p className="text-2xl">{playersOnline >= 2 ? `${playersOnline} Players Online` : `${playersOnline} Player Online`}</p>
 				</div>
 				<div className="flex items-center gap-4">
 					<FilterPlayers />
