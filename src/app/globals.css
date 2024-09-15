@@ -65,14 +65,15 @@ body {
   * {
     @apply border-border;
   }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply flex flex-col justify-center items-center text-white;
   }
 }
 
 @layer components {
   .main {
-    @apply flex justify-center w-full h-full bg-background;
+    @apply flex bg-background justify-center h-full w-4/5;
   }
   
   .topbar {
