@@ -1,11 +1,11 @@
 import Topbar from '@/components/shared/Topbar';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
-import { Libre_Baskerville, Open_Sans } from 'next/font/google';
+import { BioRhyme, Open_Sans } from 'next/font/google';
 import './globals.css';
 
 // Custom Fonts
-const fontHeading = Libre_Baskerville({ subsets: ['latin'], weight: ['700'], variable: '--font-heading' });
+const fontHeading = BioRhyme({ subsets: ['latin'], weight: ['400'], variable: '--font-heading' });
 const fontBody = Open_Sans({ subsets: ['latin'], variable: '--font-body' });
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn('antialiased dark h-screen', fontBody.variable, fontHeading.variable)}>
+			<body className={cn('antialiased dark h-screen bg-background text-white', fontBody.variable, fontHeading.variable)}>
 				<Topbar />
 				<main className="main">{children}</main>
 			</body>

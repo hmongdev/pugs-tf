@@ -1,7 +1,7 @@
-import MatchMaker from '@/components/shared/MatchMaker';
+import LobbyQueue from '@/components/shared/LobbyQueue';
 
 const HomePage = () => {
-	return <MatchMaker />;
+	return <LobbyQueue />;
 };
 
 export default HomePage;
