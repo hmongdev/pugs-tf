@@ -5,15 +5,22 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 // Define allowed class names as a type
 type ClassName = 'flankscout' | 'pocketscout' | 'roamersoldier' | 'pocketsoldier' | 'demoman' | 'medic';
 
+// Define Player type
+interface Player {
+	personaname: string;
+	avatar: string;
+	steamid: string;
+}
+
 // Define the shape of the context
 interface ClassContextType {
-	flankScoutArray: string[];
-	pocketScoutArray: string[];
-	roamerSoldierArray: string[];
-	pocketSoldierArray: string[];
-	demomanArray: string[];
-	medicArray: string[];
-	toggleClass: (className: ClassName, user: string) => void;
+	flankScoutArray: Player[];
+	pocketScoutArray: Player[];
+	roamerSoldierArray: Player[];
+	pocketSoldierArray: Player[];
+	demomanArray: Player[];
+	medicArray: Player[];
+	toggleClass: (className: ClassName, player: Player) => void;
 }
 
 // Create a default context value
@@ -21,17 +28,18 @@ const ClassContext = createContext<ClassContextType | undefined>(undefined);
 
 // Provide the context to components
 export const ClassProvider = ({ children }: { children: ReactNode }) => {
-	// States
-	const [flankScoutArray, setFlankScoutArray] = useState<string[]>([]);
-	const [pocketScoutArray, setPocketScoutArray] = useState<string[]>([]);
-	const [roamerSoldierArray, setRoamerSoldierArray] = useState<string[]>([]);
-	const [pocketSoldierArray, setPocketSoldierArray] = useState<string[]>([]);
-	const [demomanArray, setDemomanArray] = useState<string[]>([]);
-	const [medicArray, setMedicArray] = useState<string[]>([]);
+	// States for each class containing Player objects
+	const [flankScoutArray, setFlankScoutArray] = useState<Player[]>([]);
+	const [pocketScoutArray, setPocketScoutArray] = useState<Player[]>([]);
+	const [roamerSoldierArray, setRoamerSoldierArray] = useState<Player[]>([]);
+	const [pocketSoldierArray, setPocketSoldierArray] = useState<Player[]>([]);
+	const [demomanArray, setDemomanArray] = useState<Player[]>([]);
+	const [medicArray, setMedicArray] = useState<Player[]>([]);
 
 	// Function to toggle a class
-	const toggleClass = (className: ClassName, user: string) => {
-		const classMap: Record<ClassName, { state: string[]; setState: React.Dispatch<React.SetStateAction<string[]>> }> = {
+	const toggleClass = (className: ClassName, player: Player) => {
+		// Map each class to its respective state and setter
+		const classMap: Record<ClassName, { state: Player[]; setState: React.Dispatch<React.SetStateAction<Player[]>> }> = {
 			flankscout: { state: flankScoutArray, setState: setFlankScoutArray },
 			pocketscout: { state: pocketScoutArray, setState: setPocketScoutArray },
 			roamersoldier: { state: roamerSoldierArray, setState: setRoamerSoldierArray },
@@ -42,10 +50,13 @@ export const ClassProvider = ({ children }: { children: ReactNode }) => {
 
 		const classData = classMap[className];
 
-		if (classData.state.includes(user)) {
-			classData.setState(classData.state.filter((player) => player !== user)); // remove user
+		// Check if the player is already in the class
+		if (classData.state.some((p) => p.steamid === player.steamid)) {
+			// Remove player if they already exist
+			classData.setState(classData.state.filter((p) => p.steamid !== player.steamid));
 		} else {
-			classData.setState([...classData.state, user]); // add user
+			// Add player if they are not in the class
+			classData.setState([...classData.state, player]);
 		}
 	};
 
