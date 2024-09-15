@@ -1,7 +1,7 @@
-import LobbyQueue from '@/components/shared/LobbyQueue';
+import ChooseClass from '@/components/shared/ChooseClass';
 
 const HomePage = () => {
-	return <LobbyQueue />;
+	return <ChooseClass />;
 };
 
 export default HomePage;
