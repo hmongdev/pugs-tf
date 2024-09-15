@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={cn('antialiased dark h-screen bg-background', fontBody.variable, fontHeading.variable)}>
+			<body className={cn('antialiased dark h-screen bg-background text-white', fontBody.variable, fontHeading.variable)}>
 				<Topbar />
 				<main className="main">{children}</main>
 			</body>

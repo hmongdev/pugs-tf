@@ -67,7 +67,7 @@ body {
   }
   
   body {
-    @apply flex flex-col justify-center items-center text-white;
+    @apply flex flex-col justify-center items-center;
   }
 }
 

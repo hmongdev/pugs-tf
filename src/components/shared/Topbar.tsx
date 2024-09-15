@@ -1,11 +1,14 @@
 'use client';
 
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { SteamProfileType } from '@/types/steam';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { FilterPlayers } from './FilterPlayers';
+
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
 export default function Topbar() {
 	const router = useRouter();
@@ -17,6 +20,16 @@ export default function Topbar() {
 
 	const handleSteamLogin = () => {
 		router.push(`/api/auth/steam?returnUrl=${encodeURIComponent(returnUrl)}`);
+	};
+
+	const handleSteamLogout = async () => {
+		try {
+			await fetch('/api/auth/steam/logout'); // Call the logout route
+			router.push('/'); // Redirect to the home page or another desired route
+			setSteamProfile(null);
+		} catch (error) {
+			console.error('Logout failed:', error);
+		}
 	};
 
 	const fetchProfile = async (steamId: string) => {
@@ -48,7 +61,7 @@ export default function Topbar() {
 			<div className="absolute -inset-px bg-gradient-to-r from-orange-700/60 via-red-500 to-yellow-500" aria-hidden="true" />
 			<div className="absolute inset-0 bg-card" aria-hidden="true" />
 
-			<div className="z-10 flex items-center justify-between gap-6 text-white w-full">
+			<div className="z-10 flex items-center justify-between gap-6 w-full">
 				<div className="flex gap-1">
 					<p className="text-2xl">{playersOnline} Players Online</p>
 				</div>
@@ -61,14 +74,22 @@ export default function Topbar() {
 					)}
 					{steamProfile && (
 						<div className="flex items-center gap-2">
-							<Image
-								src={steamProfile.avatar}
-								width={100}
-								height={100}
-								alt={`${steamProfile.personaname}'s profile picture`}
-								className="w-10 h-10 rounded-full"
-							/>
-							<span>{steamProfile.personaname}</span>
+							<DropdownMenu>
+								<DropdownMenuTrigger>
+									<Avatar>
+										<AvatarImage src={steamProfile.avatar} />
+									</Avatar>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent>
+									<DropdownMenuLabel>
+										<Link href={`profile/${steamProfile.steamid}`}>Profile</Link>
+									</DropdownMenuLabel>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem>
+										<div onClick={handleSteamLogout}>Log out</div>
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
 						</div>
 					)}
 				</div>
