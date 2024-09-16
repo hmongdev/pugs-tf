@@ -1,7 +1,7 @@
-import ChooseClass from '@/components/shared/ChooseClass';
+import ClassChooser from '@/components/shared/ClassChooser';
 
 const HomePage = () => {
-	return <ChooseClass />;
+	return <ClassChooser />;
 };
 
 export default HomePage;
