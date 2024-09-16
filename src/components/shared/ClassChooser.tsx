@@ -30,7 +30,7 @@ const normalizeClassName = (className: string): ClassName => {
 	return normalized as ClassName;
 };
 
-const ChooseClass = () => {
+const ClassChooser = () => {
 	// Access the UserContext to get the logged-in user
 	const { steamProfile, login } = useUserContext();
 	const isUserLoggedIn = !!steamProfile; // Check if user is logged in
@@ -60,14 +60,19 @@ const ChooseClass = () => {
 			const players = classStates[className as ClassName];
 
 			return (
-				<div key={className} className="flex flex-col gap-1">
+				<div key={className} className="flex flex-col justify-center items-center gap-1">
 					{players.length > 0 &&
 						players.map((player, idx) => (
-							<Card key={idx} className="flex items-center gap-2 p-2 bg-card rounded-sm justify-start">
-								<Avatar>
-									<AvatarImage src={player.avatar} />
-								</Avatar>
-								<p>{player.personaname}</p>
+							<Card key={idx} className="flex p-2 bg-card rounded-sm justify-start w-full">
+								<div className="flex w-full justify-between items-center">
+									<div className="flex gap-2 items-center">
+										<Avatar>
+											<AvatarImage src={player.avatar} />
+										</Avatar>
+										<p className="hidden sm:flex text-xs md:text-sm font-semibold text-center">{player.personaname}</p>
+									</div>
+									<p className="hidden lg:flex text-yellow-500">1000</p>
+								</div>
 							</Card>
 						))}
 				</div>
@@ -136,4 +141,4 @@ const ChooseClass = () => {
 	);
 };
 
-export default ChooseClass;
+export default ClassChooser;
