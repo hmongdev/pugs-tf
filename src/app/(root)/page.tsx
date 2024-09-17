@@ -1,7 +1,13 @@
-import ClassChooser from '@/components/shared/ClassChooser';
+'use client';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const HomePage = () => {
-	return <ClassChooser />;
+	const router = useRouter();
+
+	useEffect(() => {
+		router.push('/pugs');
+	}, [router]);
 };
 
 export default HomePage;
